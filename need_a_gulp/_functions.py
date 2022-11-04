@@ -1,16 +1,19 @@
 # Functions for Need_A_Gulp
+## imports
 import time
-
+import random
 
 class GULP:
 
-    def __init__(self, stock_names, stock_prices, stock, cash_in_wallet, user_name, user_input):
+## initialization
+    def __init__(self, stock_names, stock_prices, stock, cash_in_wallet, user_name, user_input, staff_id):
         self.stock_names = stock_names
         self.stock_prices = stock_prices
         self.stock = stock
         self.cash_in_wallet = cash_in_wallet
         self.user_name = user_name
         self.user_input = user_input
+        self.staff_id = staff_id
 
     def display_purchase(self, name, price):
         if self.cash_in_wallet > price:
@@ -19,16 +22,45 @@ class GULP:
             print(f"You just purchased {name} for ${price}.")
             time.sleep(1)
             print(f"You now have ${self.cash_in_wallet} remaining.")
+            self.user_input = input("1. Make another purchase\n2. End\n")
+            if self.user_input == '1':
+                self.customer_actual_dashboard()
+            
+            elif self.user_input == '2':
+                print("Are you sure you want to quit? 'Y' for yes. Any other key would cancel it.")
+                self.user_input = input().lower()
+                if self.user_input == 'y':
+                    print(f"Thank you for your patronage, {self.user_name}")
+
+                else:
+                    self.customer_dashboard()
+
+            else: 
+                print("Invalid input")
+                self.customer_dashboard()
+
 
         elif price > self.cash_in_wallet:
             time.sleep(0.5)
             print(f"Sorry, insufficient balance. You have ${self.cash_in_wallet} in your wallet.")
+            print("You'll be redirected to fund your wallet now.") 
+            self.user_input= input("Is that okay? 'y' for yes, 'n' for no.\n").lower()
+            if self.user_input == 'y':
+                self.fund_wallet()
+
+            elif self.user_input == 'n':
+                print("This process would be terminated now. Thank you.")
+
+            else:
+                print("Invalid input. Please try again.")
+                self.customer_actual_dashboard()
 
         else:
             print("Sorry, invalid input.")
 
     def employee_dashboard(self):
-        print(f"Welcome to Need a gulp! Staff {self.user_name}")
+        staff_id = random.randint(0, 9999)
+        print(f"Welcome to Need a gulp! Staff {self.user_name}. '{staff_id}' is your private staff id.")
         print(">>>>>MORE INFORMATION COMING SOON!<<<<<")
         time.sleep(1)
         self.employee_actual_dashboard()
@@ -61,14 +93,38 @@ class GULP:
         else:
             print("Invalid input. Try again.")
             time.sleep(0.5)
-            # customer_dashboard()
+            self.customer_dashboard()
+     
+    #  def fund_wallet(self):
+    #     add_funds = input("How much would you like to add to your account? $")
+    #     if add_funds == int():
+    #         confirm_add_funds = input(f"To be certain, did you mean ${add_funds}? 'y' for 'Yes'/ 'n' for 'No'. \n").lower()
+    #         if confirm_add_funds == 'y':
+    #             # Maybe add a password for security
+    #             self.cash_in_wallet = self.cash_in_wallet + int(add_funds)
+    #             print(f"Your wallet has been updated. Your new balance is ${self.cash_in_wallet}")
+    #             self.customer_actual_dashboard()
+            
+    #         elif confirm_add_funds == 'n':
+    #             print("Okay, then.")
+    #             time.sleep(0.3)
+    #             self.fund_wallet()
+
+    #         else:
+    #             print(f"{confirm_add_funds} is an invalid input, Please try again.")
+    #             time.sleep(0.2)
+    #             self.fund_wallet()
+
+    #     else:
+    #         print("Nice try. Please input an actual value")
+    #         self.fund_wallet()
 
     def fund_wallet(self):
         add_funds = input("How much would you like to add to your account? $")
         confirm_add_funds = input(f"To be certain, did you mean ${add_funds}? 'y' for 'Yes'/ 'n' for 'No'. ").lower()
         if confirm_add_funds == 'y':
             # Maybe add a password for security
-            self.cash_in_wallet = self.cash_in_wallet + add_funds
+            self.cash_in_wallet = self.cash_in_wallet + int(add_funds)
             print(f"Your wallet has been updated. Your new balance is ${self.cash_in_wallet}")
             self.customer_actual_dashboard()
 
@@ -109,10 +165,17 @@ class GULP:
             customer_choice = input("So what would you like? ")
             if customer_choice == '1':
                 self.fund_wallet()
+
             elif customer_choice == '2':
                 self.customer_actual_dashboard()
+            
             else:
                 print("Invalid input. You will be redirected to the dashboard.")
                 self.customer_actual_dashboard()
         else:
             print("Invalid input, please try again!")
+            self.customer_actual_dashboard()
+
+    def purchase_cart(self):
+        #This would be to display the total purchases.
+        pass
