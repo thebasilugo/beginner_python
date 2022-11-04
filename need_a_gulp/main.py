@@ -1,16 +1,21 @@
 # Welcome to Need a gulp!
+
+## imports/packages
 import time
 import random
 from _functions import GULP
 
+## initializations
 cash_in_wallet = 0.00
 stock = [0, 0, 0, 0, 0, 0]
 stock_names = ["Milk Chocolate", "Coffee", "Latte", "Cappuccino", "Espresso", "Wallet"]
 stock_prices = [5.99, 8.66, 9.47, 11.28, 12.28, cash_in_wallet]
+# The array below would be used to create a random char to append to the pin
+# dict_char=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 user_name = input("Welcome to Need a gulp, I'm Slushious. What is your name? \n")
 user_input = 0
-staff_id = [random.randint(0, 9999) for i in range(1)]
+staff_id = 0
 
 gulp = GULP(stock_names, stock_prices, stock, cash_in_wallet, user_name, user_input, staff_id)
 #
@@ -31,7 +36,7 @@ if user_name != 'thebasilugo':
         while staff_login > 0:
             user_input = input("Please input the employee password below to access the dashboard. \n").lower()
             time.sleep(1)
-            if user_input == 'need_a_gulp_rocks':
+            if user_input == 'need-a-gulp-rocks':
                 print("Correct password!")
                 gulp.employee_dashboard()
                 break
