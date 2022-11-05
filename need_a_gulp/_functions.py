@@ -6,20 +6,25 @@ import random
 class GULP:
 
 ## initialization
-    def __init__(self, stock_names, stock_prices, stock, cash_in_wallet, user_name, user_input, staff_id):
+    def __init__(self, stock_names, stock_prices, name, price, stock, cash_in_wallet, user_name, user_input, staff_id, purch_amt):
         self.stock_names = stock_names
         self.stock_prices = stock_prices
+        self.name = name
+        self.price = price
         self.stock = stock
         self.cash_in_wallet = cash_in_wallet
         self.user_name = user_name
         self.user_input = user_input
         self.staff_id = staff_id
+        self.purch_amt = purch_amt
+        
+
 
     def display_purchase(self, name, price):
         if self.cash_in_wallet > price:
             self.cash_in_wallet = self.cash_in_wallet - price
             time.sleep(0.5)
-            print(f"You just purchased {name} for ${price}.")
+            print(f"You just purchased {self.name} for ${self.price}.")
             time.sleep(1)
             print(f"You now have ${self.cash_in_wallet} remaining.")
             self.user_input = input("1. Make another purchase\n2. End\n")
@@ -31,6 +36,7 @@ class GULP:
                 self.user_input = input().lower()
                 if self.user_input == 'y':
                     print(f"Thank you for your patronage, {self.user_name}")
+                    self.purchase_summary()
 
                 else:
                     self.customer_dashboard()
@@ -66,18 +72,30 @@ class GULP:
         self.employee_actual_dashboard()
 
     def employee_actual_dashboard(self):
-        print("click '1' to purchase something or '2' to end.")
+        print("click '1' to purchase something, '2' to update prices or '3' to end.")
         self.user_input = input()
         if self.user_input == '1':
             time.sleep(1)
             self.customer_actual_dashboard()
 
         elif self.user_input == '2':
-            print("Thank you for your patronage.")
+            self.list_update(self.name, self.price)
+        
+        elif self.user_input == '3':
+            print("Come back soon.")
 
         else:
             print("Invalid input, Please try again.")
             self.employee_actual_dashboard()
+    
+    def list_update(self, name, price):
+        print("Please use the menu below to update a price.")
+        for i in range (len(self.stock_names)):
+            for name in  self.stock_names:
+                self.stock_names[name]
+                print(f"{i+1}. {self.name}, {self.price}")
+                name = name + 1
+        pass
 
     def customer_dashboard(self):
         print(f"You have ${self.cash_in_wallet} in your wallet. Would you like to fund your wallet?")
@@ -147,18 +165,23 @@ class GULP:
 
         if customer_input == '1':
             self.display_purchase('Milk Chocolate', 5.99)
+            self.purch_amt()
 
         elif customer_input == '2':
             self.display_purchase('Coffee', 8.66)
+            self.purch_amt()
 
         elif customer_input == '3':
             self.display_purchase('Latte', 9.47)
+            self.purch_amt()
 
         elif customer_input == '4':
             self.display_purchase('Cappuccino', 11.28)
+            self.purch_amt()
 
         elif customer_input == '5':
             self.display_purchase('Espresso', 12.28)
+            self.purch_amt()
 
         elif customer_input == '6':
             print("1.Fund wallet \n2.<<Back.\n")
@@ -175,7 +198,14 @@ class GULP:
         else:
             print("Invalid input, please try again!")
             self.customer_actual_dashboard()
+    
+    def purch_amt(self):
+        self.purch_amt = 0
+        self.purch_amt = self.purch_amt + 1
+        return self.purch_amt
 
-    def purchase_cart(self):
+    def purchase_summary(self):
+        print(f"You made a total of {str(self.purch_amt)} purchase(s). They are:")
+        # print(list_purch_amt)
         #This would be to display the total purchases.
         pass
