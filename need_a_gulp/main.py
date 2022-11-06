@@ -16,8 +16,11 @@ stock_prices = [5.99, 8.66, 9.47, 11.28, 12.28, cash_in_wallet]
 user_name = input("Welcome to Need a gulp, I'm Slushious. What is your name? \n")
 user_input = 0
 staff_id = 0
+purch_amt = 0
+name = '0'
+price = 0
 
-gulp = GULP(stock_names, stock_prices, stock, cash_in_wallet, user_name, user_input, staff_id)
+gulp = GULP(stock_names, stock_prices, name, price, stock, cash_in_wallet, user_name, user_input, staff_id, purch_amt)
 #
 
 # Staff_login = Number of login attempts for 'staff' to ensure that they are actually staff.
@@ -61,12 +64,14 @@ if user_name != 'thebasilugo':
 
     else:
         print("Sorry, " + user_name + ". Your input is invalid. Please Try again.")
+        
 
         # Should be able to refer back to beginning so code can be efficiently run over time.
         # Should maybe have an "End" to end process, instead of forcing customers to buy.
 
 elif user_name == 'thebasilugo':
     print("Welcome chief, I hope you're having a lovely day.")
+    cash_in_wallet = 200
 
     # Should automatically log 'thebasilugo' in as a staff (or executive, if dashboard should exist)
     gulp.employee_dashboard()
