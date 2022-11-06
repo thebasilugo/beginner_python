@@ -1,24 +1,21 @@
 # Functions for Need_A_Gulp
 ## imports
 import time
+import string
 import random
 
 class GULP:
 
 ## initialization
-    def __init__(self, stock_names, stock_prices, name, price, stock, cash_in_wallet, user_name, user_input, staff_id, purch_amt):
+    def __init__(self, stock_names, stock_prices, stock, cash_in_wallet, user_name, user_input, staff_id, purch_amt):
         self.stock_names = stock_names
         self.stock_prices = stock_prices
-        self.name = name
-        self.price = price
         self.stock = stock
         self.cash_in_wallet = cash_in_wallet
         self.user_name = user_name
         self.user_input = user_input
         self.staff_id = staff_id
         self.purch_amt = purch_amt
-        
-
 
     def display_purchase(self, name, price):
         if self.cash_in_wallet > price:
@@ -65,11 +62,18 @@ class GULP:
             print("Sorry, invalid input.")
 
     def employee_dashboard(self):
-        staff_id = random.randint(0, 9999)
-        print(f"Welcome to Need a gulp! Staff {self.user_name}. '{staff_id}' is your private staff id.")
-        print(">>>>>MORE INFORMATION COMING SOON!<<<<<")
-        time.sleep(1)
+        print(f"Welcome to Need a gulp! Staff {self.user_name}.")
+        time.sleep(0.5)
+        self.generate_id()
+        time.sleep(0.5)
         self.employee_actual_dashboard()
+    
+    def generate_id(self):
+        S = 6 # number of characters in the string.  
+        # call random.choices() string module to find the string in Uppercase + numeric data.  
+        staff_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k = S))    
+        # print("The randomly generated string is : " + str(staff_id)) # print the random data
+        print(f"Your private staff ID is : {str(staff_id)}")
 
     def employee_actual_dashboard(self):
         print("click '1' to purchase something, '2' to update prices or '3' to end.")
@@ -79,7 +83,7 @@ class GULP:
             self.customer_actual_dashboard()
 
         elif self.user_input == '2':
-            self.list_update(self.name, self.price)
+            self.list_update()
         
         elif self.user_input == '3':
             print("Come back soon.")
@@ -88,13 +92,11 @@ class GULP:
             print("Invalid input, Please try again.")
             self.employee_actual_dashboard()
     
-    def list_update(self, name, price):
+    def list_update(self):
         print("Please use the menu below to update a price.")
-        for i in range (len(self.stock_names)):
-            for name in  self.stock_names:
-                self.stock_names[name]
-                print(f"{i+1}. {self.name}, {self.price}")
-                name = name + 1
+        for i in range(len(self.stock)):
+            print(f"{i+1}. {self.stock_names[i]}, {self.stock_prices[i]}")
+            i + 1
         pass
 
     def customer_dashboard(self):
@@ -112,7 +114,9 @@ class GULP:
             print("Invalid input. Try again.")
             time.sleep(0.5)
             self.customer_dashboard()
-     
+    
+    #   Code for regulating the amount entered for wallet increase.
+    #   
     #  def fund_wallet(self):
     #     add_funds = input("How much would you like to add to your account? $")
     #     if add_funds == int():
