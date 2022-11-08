@@ -97,7 +97,10 @@ class GULP:
         for i in range(len(self.stock)):
             print(f"{i+1}. {self.stock_names[i]}, {self.stock_prices[i]}")
             i + 1
+            break
+        user_input = input("What would you like to make updates to?")
         pass
+
 
     def customer_dashboard(self):
         print(f"You have ${self.cash_in_wallet} in your wallet. Would you like to fund your wallet?")
