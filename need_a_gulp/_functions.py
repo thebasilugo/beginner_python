@@ -99,8 +99,20 @@ class GULP:
             i + 1
             break
         user_input = input("What would you like to make updates to?")
-        pass
-
+        if self.user_input == '1':
+            pass
+        elif self.user_input == '2':
+            pass
+        elif self.user_input == '3':
+            pass
+        elif self.user_input == '4':
+            pass
+        elif self.user_input == '5':
+            pass
+        elif self.user_input =='6':
+            pass
+        else:
+            pass
 
     def customer_dashboard(self):
         print(f"You have ${self.cash_in_wallet} in your wallet. Would you like to fund your wallet?")
