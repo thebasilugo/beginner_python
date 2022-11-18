@@ -37,6 +37,7 @@ if user_name != 'thebasilugo':
         while staff_login > 0:
             user_input = input("Please input the employee password below to access the dashboard. \n").lower()
             time.sleep(1)
+            # try to hide the password for better security
             if user_input == 'need-a-gulp-rocks':
                 print("Correct password!")
                 gulp.employee_dashboard()
