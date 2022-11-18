@@ -21,7 +21,7 @@ class GULP:
         if self.cash_in_wallet > price:
             self.cash_in_wallet = self.cash_in_wallet - price
             time.sleep(0.5)
-            print(f"You just purchased {self.name} for ${self.price}.")
+            print(f"You just purchased {name} for ${price}.")
             time.sleep(1)
             print(f"You now have ${self.cash_in_wallet} remaining.")
             self.user_input = input("1. Make another purchase\n2. End\n")
@@ -39,7 +39,7 @@ class GULP:
                     self.customer_dashboard()
 
             else: 
-                print("Invalid input")
+                self.wrong_input()
                 self.customer_dashboard()
 
 
@@ -55,11 +55,11 @@ class GULP:
                 print("This process would be terminated now. Thank you.")
 
             else:
-                print("Invalid input. Please try again.")
+                self.wrong_input()
                 self.customer_actual_dashboard()
 
         else:
-            print("Sorry, invalid input.")
+            self.wrong_input()
 
     def employee_dashboard(self):
         print(f"Welcome to Need a gulp! Staff {self.user_name}.")
@@ -89,7 +89,7 @@ class GULP:
             print("Come back soon.")
 
         else:
-            print("Invalid input, Please try again.")
+            self.wrong_input()
             self.employee_actual_dashboard()
     
     def list_update(self):
@@ -100,19 +100,30 @@ class GULP:
             break
         user_input = input("What would you like to make updates to?")
         if self.user_input == '1':
-            pass
+            self.list_make_update()
+        
         elif self.user_input == '2':
-            pass
+            self.list_make_update()
+        
         elif self.user_input == '3':
-            pass
+            self.list_make_update()
+        
         elif self.user_input == '4':
-            pass
+            self.list_make_update()
+        
         elif self.user_input == '5':
-            pass
+            self.list_make_update()
+        
         elif self.user_input =='6':
-            pass
+            self.list_make_update()
+        
         else:
-            pass
+            self.wrong_input()
+            self.list_update()
+            
+    
+    def list_make_update(self):
+        pass
 
     def customer_dashboard(self):
         print(f"You have ${self.cash_in_wallet} in your wallet. Would you like to fund your wallet?")
@@ -126,7 +137,7 @@ class GULP:
             self.customer_actual_dashboard()
 
         else:
-            print("Invalid input. Try again.")
+            self.wrong_input()
             time.sleep(0.5)
             self.customer_dashboard()
     
@@ -212,10 +223,11 @@ class GULP:
                 self.customer_actual_dashboard()
             
             else:
-                print("Invalid input. You will be redirected to the dashboard.")
+                self.wrong_input()
+                print("You will be redirected to the dashboard.")
                 self.customer_actual_dashboard()
         else:
-            print("Invalid input, please try again!")
+            self.wrong_input()
             self.customer_actual_dashboard()
     
     def purch_amt(self):
@@ -228,3 +240,6 @@ class GULP:
         # print(list_purch_amt)
         #This would be to display the total purchases.
         pass
+    
+    def wrong_input(self):
+        print("The input you entered is invalid. Please try again.\n")
